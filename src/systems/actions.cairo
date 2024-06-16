@@ -1,98 +1,127 @@
-use dojo_starter::models::moves::Direction;
-use dojo_starter::models::position::Position;
-
-// define the interface
 #[dojo::interface]
 trait IActions {
     fn spawn(ref world: IWorldDispatcher);
-    fn move(ref world: IWorldDispatcher, direction: Direction);
+
+    fn plant(ref world: IWorldDispatcher, land_id: u128);
+
+    fn watering_myself(ref world: IWorldDispatcher, tree_id: u128);
 }
+
 
 // dojo decorator
 #[dojo::contract]
 mod actions {
-    use super::{IActions, next_position};
-    use starknet::{ContractAddress, get_caller_address};
-    use dojo_starter::models::{
-        position::{Position, Vec2}, moves::{Moves, Direction, DirectionsAvailable}
+    use super::{IActions};
+    use starknet::{ContractAddress, get_caller_address, get_block_timestamp};
+    use stark_farmland::models::{
+        player::{Player}, tree::{Tree, TreeStage, TreeManager, TREE_MANAGER},
+        land::{Land, LandManager, LAND_MANAGER}
     };
 
-    #[derive(Copy, Drop, Serde)]
-    #[dojo::model]
-    #[dojo::event]
-    struct Moved {
-        #[key]
-        player: ContractAddress,
-        direction: Direction,
-    }
 
     #[abi(embed_v0)]
-    impl ActionsImpl of IActions<ContractState> {
+    impl PlantActions of IActions<ContractState> {
         fn spawn(ref world: IWorldDispatcher) {
-            // Get the address of the current caller, possibly the player's address.
-            let player = get_caller_address();
-            // Retrieve the player's current position from the world.
-            let position = get!(world, player, (Position));
+            let caller = get_caller_address();
+            let mut player = get!(world, caller, (Player));
 
-            // Update the world state with the new data.
-            // 1. Set the player's remaining moves to 100.
-            // 2. Move the player's position 10 units in both the x and y direction.
-            // 3. Set available directions to all four directions. (This is an example of how you can use an array in Dojo).
+            let mut land_manager = get!(world, LAND_MANAGER, (LandManager));
 
-            let directions_available = DirectionsAvailable {
-                player,
-                directions: array![
-                    Direction::Up, Direction::Right, Direction::Down, Direction::Left
-                ],
-            };
+            let land_id = land_manager.current_land_id;
+
+            assert(!player.is_spawn, 'already spawn');
+
+            if (!player.is_spawn) {
+                set!(
+                    world,
+                    (
+                        Player {
+                            player: caller,
+                            is_spawn: true,
+                            tree_array: array![],
+                            land_array: array![land_id],
+                            seed_amount: 1
+                        },
+                        LandManager { key_name: LAND_MANAGER, current_land_id: land_id + 1, },
+                        Land { id: land_id, player: caller, is_available: true, }
+                    )
+                );
+            }
+        }
+
+        fn plant(ref world: IWorldDispatcher, land_id: u128) {
+            let caller = get_caller_address();
+            let mut player = get!(world, caller, (Player));
+            let mut land = get!(world, land_id, (Land));
+
+            let mut tree_manager = get!(world, TREE_MANAGER, (TreeManager));
+
+            assert(land.player == caller && land.is_available, 'land invaild');
+            assert(player.seed_amount > 0, 'seed invaild');
+
+            let tree_id: u128 = tree_manager.current_tree_id;
+
+            let mut new_tree_array = player.tree_array;
+            new_tree_array.append(tree_id);
 
             set!(
                 world,
                 (
-                    Moves {
-                        player, remaining: 100, last_direction: Direction::None(()), can_move: true
+                    Tree {
+                        id: tree_id,
+                        player: caller,
+                        water_value: 0,
+                        last_watered_timestamp: get_block_timestamp(),
+                        is_fruited: false,
                     },
-                    Position {
-                        player, vec: Vec2 { x: position.vec.x + 10, y: position.vec.y + 10 }
-                    },
-                    directions_available
+                    TreeManager { key_name: TREE_MANAGER, current_tree_id: tree_id + 1, },
+                    Land { id: land.id, player: land.player, is_available: false, },
+                    Player {
+                        player: player.player,
+                        is_spawn: true,
+                        tree_array: new_tree_array,
+                        land_array: player.land_array,
+                        seed_amount: player.seed_amount - 1,
+                    }
                 )
-            );
+            )
         }
 
-        // Implementation of the move function for the ContractState struct.
-        fn move(ref world: IWorldDispatcher, direction: Direction) {
-            // Get the address of the current caller, possibly the player's address.
-            let player = get_caller_address();
+        fn watering_myself(ref world: IWorldDispatcher, tree_id: u128) {
+            let caller = get_caller_address();
+            let mut tree = get!(world, tree_id, (Tree));
 
-            // Retrieve the player's current position and moves data from the world.
-            let (mut position, mut moves) = get!(world, player, (Position, Moves));
+            // check assert
+            assert(tree.player == caller, 'caller not owner');
+            assert(tree.last_watered_timestamp + 3600 < get_block_timestamp(), 'once an hour');
+            assert(!tree.is_fruited, 'tree has fruited');
 
-            // Deduct one from the player's remaining moves.
-            moves.remaining -= 1;
+            // check water_value
+            let reduction = ((get_block_timestamp() - tree.last_watered_timestamp) / 21600) * 30;
+            let mut current_water_value = 0;
+            let mut current_is_fruited = false;
 
-            // Update the last direction the player moved in.
-            moves.last_direction = direction;
+            if (tree.water_value > reduction) {
+                current_water_value = tree.water_value - reduction + 20;
+            } else {
+                current_water_value = 20;
+            }
 
-            // Calculate the player's next position based on the provided direction.
-            let next = next_position(position, direction);
+            if (current_water_value >= 100) {
+                current_is_fruited = true;
+                current_water_value = 100;
+            }
 
-            // Update the world state with the new moves data and position.
-            set!(world, (moves, next));
-            // Emit an event to the world to notify about the player's move.
-            emit!(world, (Moved { player, direction }));
+            set!(
+                world,
+                (Tree {
+                    id: tree.id,
+                    player: tree.player,
+                    water_value: current_water_value,
+                    last_watered_timestamp: get_block_timestamp(),
+                    is_fruited: current_is_fruited,
+                })
+            )
         }
     }
-}
-
-// Define function like this:
-fn next_position(mut position: Position, direction: Direction) -> Position {
-    match direction {
-        Direction::None => { return position; },
-        Direction::Left => { position.vec.x -= 1; },
-        Direction::Right => { position.vec.x += 1; },
-        Direction::Up => { position.vec.y -= 1; },
-        Direction::Down => { position.vec.y += 1; },
-    };
-    position
 }
