@@ -1,0 +1,10 @@
+kind = "DojoContract"
+class_hash = "0x252320c7001224740508ac60bc82136623f4f9ad0ec60e3ff4506c2e99fd147"
+original_class_hash = "0x252320c7001224740508ac60bc82136623f4f9ad0ec60e3ff4506c2e99fd147"
+base_class_hash = "0x0"
+abi = "manifests/dev/abis/base/contracts/stark_farmland_systems_actions_actions.json"
+reads = []
+writes = []
+computed = []
+init_calldata = []
+name = "stark_farmland::systems::actions::actions"

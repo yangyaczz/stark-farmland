@@ -1,0 +1,30 @@
+kind = "DojoModel"
+class_hash = "0x3c07e0021c1d07c37e2a3c3255c6e5e645edaf1795490a9900757a8e5c219fa"
+original_class_hash = "0x3c07e0021c1d07c37e2a3c3255c6e5e645edaf1795490a9900757a8e5c219fa"
+abi = "manifests/dev/abis/base/models/stark_farmland_models_player_player.json"
+name = "stark_farmland::models::player::player"
+
+[[members]]
+name = "player"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "is_spawn"
+type = "bool"
+key = false
+
+[[members]]
+name = "tree_array"
+type = "Array<u128>"
+key = false
+
+[[members]]
+name = "land_array"
+type = "Array<u128>"
+key = false
+
+[[members]]
+name = "seed_amount"
+type = "u128"
+key = false

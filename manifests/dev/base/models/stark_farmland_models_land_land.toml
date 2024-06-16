@@ -1,0 +1,20 @@
+kind = "DojoModel"
+class_hash = "0x3759550f753375ee76c47ee516edf31c5232c99e7fe9fd4935371093f53fe6"
+original_class_hash = "0x3759550f753375ee76c47ee516edf31c5232c99e7fe9fd4935371093f53fe6"
+abi = "manifests/dev/abis/base/models/stark_farmland_models_land_land.json"
+name = "stark_farmland::models::land::land"
+
+[[members]]
+name = "id"
+type = "u128"
+key = true
+
+[[members]]
+name = "player"
+type = "ContractAddress"
+key = false
+
+[[members]]
+name = "is_available"
+type = "bool"
+key = false

@@ -1,0 +1,15 @@
+kind = "DojoModel"
+class_hash = "0x7327a9dd1b95cbb9e49b23c2d661393f81a17309dc4334ff4d656731d20e0bd"
+original_class_hash = "0x7327a9dd1b95cbb9e49b23c2d661393f81a17309dc4334ff4d656731d20e0bd"
+abi = "manifests/dev/abis/base/models/stark_farmland_models_land_land_manager.json"
+name = "stark_farmland::models::land::land_manager"
+
+[[members]]
+name = "key_name"
+type = "felt252"
+key = true
+
+[[members]]
+name = "current_land_id"
+type = "u128"
+key = false

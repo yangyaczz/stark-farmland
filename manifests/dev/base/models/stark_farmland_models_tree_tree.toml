@@ -1,0 +1,30 @@
+kind = "DojoModel"
+class_hash = "0x10bd1256d9a410f98cf77baa9c57d12d1ca96c58e34f1b106ff37552cc861ee"
+original_class_hash = "0x10bd1256d9a410f98cf77baa9c57d12d1ca96c58e34f1b106ff37552cc861ee"
+abi = "manifests/dev/abis/base/models/stark_farmland_models_tree_tree.json"
+name = "stark_farmland::models::tree::tree"
+
+[[members]]
+name = "id"
+type = "u128"
+key = true
+
+[[members]]
+name = "player"
+type = "ContractAddress"
+key = false
+
+[[members]]
+name = "water_value"
+type = "u64"
+key = false
+
+[[members]]
+name = "last_watered_timestamp"
+type = "u64"
+key = false
+
+[[members]]
+name = "is_fruited"
+type = "bool"
+key = false

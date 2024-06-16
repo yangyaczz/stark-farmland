@@ -1,0 +1,15 @@
+kind = "DojoModel"
+class_hash = "0xec0d5753d462a5c90d85ec1be82b3364920af73c5488a6fd594b8b86b6354e"
+original_class_hash = "0xec0d5753d462a5c90d85ec1be82b3364920af73c5488a6fd594b8b86b6354e"
+abi = "manifests/dev/abis/base/models/stark_farmland_models_tree_tree_manager.json"
+name = "stark_farmland::models::tree::tree_manager"
+
+[[members]]
+name = "key_name"
+type = "felt252"
+key = true
+
+[[members]]
+name = "current_tree_id"
+type = "u128"
+key = false
