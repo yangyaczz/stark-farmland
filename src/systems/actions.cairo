@@ -40,7 +40,7 @@ mod actions {
         fn spawn(ref world: IWorldDispatcher) {
             let caller = get_caller_address();
             let mut player = get!(world, caller, (Player));
-            assert(!player.is_spawn, 'already spawn');
+            // assert(!player.is_spawn, 'already spawn');
 
             let mut land_manager = get!(world, LAND_MANAGER, (LandManager));
 
@@ -52,7 +52,7 @@ mod actions {
                     Player {
                         player: caller,
                         is_spawn: true,
-                        tree_array: array![],
+                        tree_array: array![0],
                         land_array: array![land_id],
                         seed_amount: 1,
                         fruit_amount: 0,
@@ -115,7 +115,7 @@ mod actions {
 
             // check assert
             assert(tree.player == caller, 'caller not owner');
-            assert(tree.last_watered_timestamp + WATER_INTERVAL < get_block_timestamp(), 'once an hour');
+            // assert(tree.last_watered_timestamp + WATER_INTERVAL < get_block_timestamp(), 'once an hour');
             assert(!tree.is_fruited, 'tree has fruited');
 
             // check water_value

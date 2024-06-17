@@ -55,38 +55,12 @@
   },
   {
     "type": "impl",
-    "name": "ActionsImpl",
-    "interface_name": "dojo_starter::systems::actions::IActions"
-  },
-  {
-    "type": "enum",
-    "name": "dojo_starter::models::moves::Direction",
-    "variants": [
-      {
-        "name": "None",
-        "type": "()"
-      },
-      {
-        "name": "Left",
-        "type": "()"
-      },
-      {
-        "name": "Right",
-        "type": "()"
-      },
-      {
-        "name": "Up",
-        "type": "()"
-      },
-      {
-        "name": "Down",
-        "type": "()"
-      }
-    ]
+    "name": "PlantActions",
+    "interface_name": "stark_farmland::systems::actions::IActions"
   },
   {
     "type": "interface",
-    "name": "dojo_starter::systems::actions::IActions",
+    "name": "stark_farmland::systems::actions::IActions",
     "items": [
       {
         "type": "function",
@@ -97,11 +71,59 @@
       },
       {
         "type": "function",
-        "name": "move",
+        "name": "plant",
         "inputs": [
           {
-            "name": "direction",
-            "type": "dojo_starter::models::moves::Direction"
+            "name": "land_id",
+            "type": "core::integer::u128"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "watering_myself",
+        "inputs": [
+          {
+            "name": "tree_id",
+            "type": "core::integer::u128"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "watering_others",
+        "inputs": [
+          {
+            "name": "tree_id",
+            "type": "core::integer::u128"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "harvest",
+        "inputs": [
+          {
+            "name": "land_id",
+            "type": "core::integer::u128"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "convert_fruit_to_seed",
+        "inputs": [
+          {
+            "name": "fruit_amount",
+            "type": "core::integer::u128"
           }
         ],
         "outputs": [],
@@ -112,11 +134,11 @@
   {
     "type": "impl",
     "name": "IDojoInitImpl",
-    "interface_name": "dojo_starter::systems::actions::actions::IDojoInit"
+    "interface_name": "stark_farmland::systems::actions::actions::IDojoInit"
   },
   {
     "type": "interface",
-    "name": "dojo_starter::systems::actions::actions::IDojoInit",
+    "name": "stark_farmland::systems::actions::actions::IDojoInit",
     "items": [
       {
         "type": "function",
@@ -176,7 +198,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::systems::actions::actions::Event",
+    "name": "stark_farmland::systems::actions::actions::Event",
     "kind": "enum",
     "variants": [
       {

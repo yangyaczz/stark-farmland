@@ -40,3 +40,40 @@ This starter project is a constant work in progress and contributions are greatl
    - It can't get better then this, your pull request will be appreciated by the community.
 
 Happy coding!
+
+
+
+```
+katana --disable-fee
+sozo build
+sozo migrate apply
+```
+
+```
+sozo execute stark_farmland::systems::actions::actions spawn
+sozo execute stark_farmland::systems::actions::actions plant -c 1
+```
+
+torii query graphql
+```
+query {
+  playerModels {
+    edges{
+      node{
+        player
+        is_spawn
+        seed_amount
+      }
+    }
+  }
+  treeModels {
+    edges{
+      node {
+        id
+        player
+        is_fruited
+      }
+    }
+  }
+}
+```

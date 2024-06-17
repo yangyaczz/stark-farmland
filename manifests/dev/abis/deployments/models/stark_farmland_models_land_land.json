@@ -319,52 +319,48 @@
   },
   {
     "type": "impl",
-    "name": "directions_availableImpl",
-    "interface_name": "dojo_starter::models::moves::Idirections_available"
+    "name": "landImpl",
+    "interface_name": "stark_farmland::models::land::Iland"
   },
   {
     "type": "enum",
-    "name": "dojo_starter::models::moves::Direction",
+    "name": "core::bool",
     "variants": [
       {
-        "name": "None",
+        "name": "False",
         "type": "()"
       },
       {
-        "name": "Left",
-        "type": "()"
-      },
-      {
-        "name": "Right",
-        "type": "()"
-      },
-      {
-        "name": "Up",
-        "type": "()"
-      },
-      {
-        "name": "Down",
+        "name": "True",
         "type": "()"
       }
     ]
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::moves::DirectionsAvailable",
+    "name": "stark_farmland::models::land::Land",
     "members": [
+      {
+        "name": "id",
+        "type": "core::integer::u128"
+      },
       {
         "name": "player",
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "directions",
-        "type": "core::array::Array::<dojo_starter::models::moves::Direction>"
+        "name": "tree_id",
+        "type": "core::integer::u128"
+      },
+      {
+        "name": "is_available",
+        "type": "core::bool"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::models::moves::Idirections_available",
+    "name": "stark_farmland::models::land::Iland",
     "items": [
       {
         "type": "function",
@@ -372,7 +368,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::moves::DirectionsAvailable"
+            "type": "stark_farmland::models::land::Land"
           }
         ],
         "outputs": [],
@@ -382,7 +378,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::moves::directions_available::Event",
+    "name": "stark_farmland::models::land::land::Event",
     "kind": "enum",
     "variants": []
   }

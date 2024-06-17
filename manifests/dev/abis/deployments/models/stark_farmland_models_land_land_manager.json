@@ -319,52 +319,26 @@
   },
   {
     "type": "impl",
-    "name": "movedImpl",
-    "interface_name": "dojo_starter::systems::actions::actions::Imoved"
-  },
-  {
-    "type": "enum",
-    "name": "dojo_starter::models::moves::Direction",
-    "variants": [
-      {
-        "name": "None",
-        "type": "()"
-      },
-      {
-        "name": "Left",
-        "type": "()"
-      },
-      {
-        "name": "Right",
-        "type": "()"
-      },
-      {
-        "name": "Up",
-        "type": "()"
-      },
-      {
-        "name": "Down",
-        "type": "()"
-      }
-    ]
+    "name": "land_managerImpl",
+    "interface_name": "stark_farmland::models::land::Iland_manager"
   },
   {
     "type": "struct",
-    "name": "dojo_starter::systems::actions::actions::Moved",
+    "name": "stark_farmland::models::land::LandManager",
     "members": [
       {
-        "name": "player",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "name": "key_name",
+        "type": "core::felt252"
       },
       {
-        "name": "direction",
-        "type": "dojo_starter::models::moves::Direction"
+        "name": "current_land_id",
+        "type": "core::integer::u128"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::systems::actions::actions::Imoved",
+    "name": "stark_farmland::models::land::Iland_manager",
     "items": [
       {
         "type": "function",
@@ -372,7 +346,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::systems::actions::actions::Moved"
+            "type": "stark_farmland::models::land::LandManager"
           }
         ],
         "outputs": [],
@@ -382,7 +356,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::systems::actions::actions::moved::Event",
+    "name": "stark_farmland::models::land::land_manager::Event",
     "kind": "enum",
     "variants": []
   }

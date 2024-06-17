@@ -48,7 +48,7 @@ mod tests {
 
         assert(player.is_spawn, 'spawn err');
         assert(*player_land_array.at(0) == 1, 'land array err');
-        assert(*player_tree_array.at(0) == 1, 'land array err');
+        assert(*player_tree_array.at(1) == 1, 'land array err');
         assert(player.seed_amount == 0, 'seed amount err');
     // watering myself
     // actions_system.watering_myself(0);

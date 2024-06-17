@@ -319,40 +319,26 @@
   },
   {
     "type": "impl",
-    "name": "positionImpl",
-    "interface_name": "dojo_starter::models::position::Iposition"
+    "name": "tree_managerImpl",
+    "interface_name": "stark_farmland::models::tree::Itree_manager"
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::position::Vec2",
+    "name": "stark_farmland::models::tree::TreeManager",
     "members": [
       {
-        "name": "x",
-        "type": "core::integer::u32"
+        "name": "key_name",
+        "type": "core::felt252"
       },
       {
-        "name": "y",
-        "type": "core::integer::u32"
-      }
-    ]
-  },
-  {
-    "type": "struct",
-    "name": "dojo_starter::models::position::Position",
-    "members": [
-      {
-        "name": "player",
-        "type": "core::starknet::contract_address::ContractAddress"
-      },
-      {
-        "name": "vec",
-        "type": "dojo_starter::models::position::Vec2"
+        "name": "current_tree_id",
+        "type": "core::integer::u128"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::models::position::Iposition",
+    "name": "stark_farmland::models::tree::Itree_manager",
     "items": [
       {
         "type": "function",
@@ -360,7 +346,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::position::Position"
+            "type": "stark_farmland::models::tree::TreeManager"
           }
         ],
         "outputs": [],
@@ -370,7 +356,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::position::position::Event",
+    "name": "stark_farmland::models::tree::tree_manager::Event",
     "kind": "enum",
     "variants": []
   }

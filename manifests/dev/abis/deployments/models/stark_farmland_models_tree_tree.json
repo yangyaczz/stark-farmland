@@ -319,34 +319,8 @@
   },
   {
     "type": "impl",
-    "name": "movesImpl",
-    "interface_name": "dojo_starter::models::moves::Imoves"
-  },
-  {
-    "type": "enum",
-    "name": "dojo_starter::models::moves::Direction",
-    "variants": [
-      {
-        "name": "None",
-        "type": "()"
-      },
-      {
-        "name": "Left",
-        "type": "()"
-      },
-      {
-        "name": "Right",
-        "type": "()"
-      },
-      {
-        "name": "Up",
-        "type": "()"
-      },
-      {
-        "name": "Down",
-        "type": "()"
-      }
-    ]
+    "name": "treeImpl",
+    "interface_name": "stark_farmland::models::tree::Itree"
   },
   {
     "type": "enum",
@@ -364,29 +338,37 @@
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::moves::Moves",
+    "name": "stark_farmland::models::tree::Tree",
     "members": [
+      {
+        "name": "id",
+        "type": "core::integer::u128"
+      },
       {
         "name": "player",
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "remaining",
-        "type": "core::integer::u8"
+        "name": "water_value",
+        "type": "core::integer::u64"
       },
       {
-        "name": "last_direction",
-        "type": "dojo_starter::models::moves::Direction"
+        "name": "last_watered_timestamp",
+        "type": "core::integer::u64"
       },
       {
-        "name": "can_move",
+        "name": "is_fruited",
+        "type": "core::bool"
+      },
+      {
+        "name": "is_harvested",
         "type": "core::bool"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::models::moves::Imoves",
+    "name": "stark_farmland::models::tree::Itree",
     "items": [
       {
         "type": "function",
@@ -394,7 +376,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::moves::Moves"
+            "type": "stark_farmland::models::tree::Tree"
           }
         ],
         "outputs": [],
@@ -404,7 +386,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::moves::moves::Event",
+    "name": "stark_farmland::models::tree::tree::Event",
     "kind": "enum",
     "variants": []
   }
