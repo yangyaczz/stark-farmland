@@ -1,6 +1,6 @@
 kind = "DojoContract"
-class_hash = "0x252320c7001224740508ac60bc82136623f4f9ad0ec60e3ff4506c2e99fd147"
-original_class_hash = "0x252320c7001224740508ac60bc82136623f4f9ad0ec60e3ff4506c2e99fd147"
+class_hash = "0x751edff47ea8f802739a8c934b0f4dc826c4f1fdb92fb32a71c0af8040f21c2"
+original_class_hash = "0x751edff47ea8f802739a8c934b0f4dc826c4f1fdb92fb32a71c0af8040f21c2"
 base_class_hash = "0x0"
 abi = "manifests/dev/abis/base/contracts/stark_farmland_systems_actions_actions.json"
 reads = []

@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x10bd1256d9a410f98cf77baa9c57d12d1ca96c58e34f1b106ff37552cc861ee"
-original_class_hash = "0x10bd1256d9a410f98cf77baa9c57d12d1ca96c58e34f1b106ff37552cc861ee"
+class_hash = "0x382354d5987dc33471b713c70825e00eca9474fa2a7f1d7e0b38e72cad5b082"
+original_class_hash = "0x382354d5987dc33471b713c70825e00eca9474fa2a7f1d7e0b38e72cad5b082"
 abi = "manifests/dev/abis/base/models/stark_farmland_models_tree_tree.json"
 name = "stark_farmland::models::tree::tree"
 
@@ -26,5 +26,10 @@ key = false
 
 [[members]]
 name = "is_fruited"
+type = "bool"
+key = false
+
+[[members]]
+name = "is_harvested"
 type = "bool"
 key = false

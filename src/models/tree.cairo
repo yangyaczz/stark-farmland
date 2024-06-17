@@ -9,7 +9,8 @@ struct Tree {
     water_value: u64,
     last_watered_timestamp: u64,
     is_fruited: bool,
-    // stage: TreeStage,
+    is_harvested: bool,
+// stage: TreeStage,
 }
 
 
@@ -20,6 +21,7 @@ enum TreeStage {
     Growing,
     Flowering,
     Fruiting,
+    Harvesting,
 }
 
 impl TreeStageIntoFelt252 of Into<TreeStage, felt252> {
@@ -27,9 +29,10 @@ impl TreeStageIntoFelt252 of Into<TreeStage, felt252> {
         match self {
             TreeStage::Seed => 0,
             TreeStage::Sapling => 1,
-            TreeStage:: Growing => 2,
-            TreeStage:: Flowering => 3,
+            TreeStage::Growing => 2,
+            TreeStage::Flowering => 3,
             TreeStage::Fruiting => 4,
+            TreeStage::Harvesting => 5,
         }
     }
 }

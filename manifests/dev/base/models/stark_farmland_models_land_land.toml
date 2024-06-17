@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x3759550f753375ee76c47ee516edf31c5232c99e7fe9fd4935371093f53fe6"
-original_class_hash = "0x3759550f753375ee76c47ee516edf31c5232c99e7fe9fd4935371093f53fe6"
+class_hash = "0x446b2496d0dd38b7e7cc6772ce363900d5bea276d320595900d29e4bdec6d16"
+original_class_hash = "0x446b2496d0dd38b7e7cc6772ce363900d5bea276d320595900d29e4bdec6d16"
 abi = "manifests/dev/abis/base/models/stark_farmland_models_land_land.json"
 name = "stark_farmland::models::land::land"
 
@@ -12,6 +12,11 @@ key = true
 [[members]]
 name = "player"
 type = "ContractAddress"
+key = false
+
+[[members]]
+name = "tree_id"
+type = "u128"
 key = false
 
 [[members]]

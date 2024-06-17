@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x3c07e0021c1d07c37e2a3c3255c6e5e645edaf1795490a9900757a8e5c219fa"
-original_class_hash = "0x3c07e0021c1d07c37e2a3c3255c6e5e645edaf1795490a9900757a8e5c219fa"
+class_hash = "0x5cf4e5598cd2921c70a2a9c4bd810fd8acfea2eeee6be3257bb88fdfca58134"
+original_class_hash = "0x5cf4e5598cd2921c70a2a9c4bd810fd8acfea2eeee6be3257bb88fdfca58134"
 abi = "manifests/dev/abis/base/models/stark_farmland_models_player_player.json"
 name = "stark_farmland::models::player::player"
 
@@ -27,4 +27,19 @@ key = false
 [[members]]
 name = "seed_amount"
 type = "u128"
+key = false
+
+[[members]]
+name = "fruit_amount"
+type = "u128"
+key = false
+
+[[members]]
+name = "last_helped_timestamp"
+type = "u64"
+key = false
+
+[[members]]
+name = "last_pranked_timestamp"
+type = "u64"
 key = false

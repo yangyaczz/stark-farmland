@@ -349,6 +349,10 @@
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
+        "name": "tree_id",
+        "type": "core::integer::u128"
+      },
+      {
         "name": "is_available",
         "type": "core::bool"
       }

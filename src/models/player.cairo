@@ -9,13 +9,8 @@ struct Player {
     tree_array: Array<u128>,
     land_array: Array<u128>,
     seed_amount: u128,
+    fruit_amount: u128,
+    last_helped_timestamp: u64,
+    last_pranked_timestamp: u64,
 }
 
-
-// #[derive(Drop, Serde)]
-// #[dojo::model]
-// struct PlayerTreeDetail {
-//     #[key]
-//     player: ContractAddress,
-//     trees_array: Array<u128>,
-// }

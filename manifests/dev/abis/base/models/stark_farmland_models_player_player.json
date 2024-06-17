@@ -359,6 +359,18 @@
       {
         "name": "seed_amount",
         "type": "core::integer::u128"
+      },
+      {
+        "name": "fruit_amount",
+        "type": "core::integer::u128"
+      },
+      {
+        "name": "last_helped_timestamp",
+        "type": "core::integer::u64"
+      },
+      {
+        "name": "last_pranked_timestamp",
+        "type": "core::integer::u64"
       }
     ]
   },

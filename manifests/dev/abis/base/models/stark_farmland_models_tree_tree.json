@@ -359,6 +359,10 @@
       {
         "name": "is_fruited",
         "type": "core::bool"
+      },
+      {
+        "name": "is_harvested",
+        "type": "core::bool"
       }
     ]
   },

@@ -6,6 +6,7 @@ struct Land {
     #[key]
     id: u128,
     player: ContractAddress,
+    tree_id: u128,
     is_available: bool,
 }
 

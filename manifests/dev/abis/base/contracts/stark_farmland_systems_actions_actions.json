@@ -92,6 +92,42 @@
         ],
         "outputs": [],
         "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "watering_others",
+        "inputs": [
+          {
+            "name": "tree_id",
+            "type": "core::integer::u128"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "harvest",
+        "inputs": [
+          {
+            "name": "land_id",
+            "type": "core::integer::u128"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "convert_fruit_to_seed",
+        "inputs": [
+          {
+            "name": "fruit_amount",
+            "type": "core::integer::u128"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
       }
     ]
   },
