@@ -11,6 +11,11 @@ trait IActions {
     fn harvest(ref world: IWorldDispatcher, land_id: u128);
 
     fn convert_fruit_to_seed(ref world: IWorldDispatcher, fruit_amount: u128);
+
+    // test
+    fn reflash(ref world: IWorldDispatcher);
+
+    fn add_land(ref world: IWorldDispatcher);
 }
 
 
@@ -28,21 +33,21 @@ mod actions {
     const WATER_INTERVAL: u64 = 3600;
     const REDUCTION_INTERVAL: u64 = 21600;
 
-    const WATER_MYSELF_INCR:u64 = 20;
-    const WATER_OTHERS_INCR:u64 = 5;
+    const WATER_MYSELF_INCR: u64 = 20;
+    const WATER_OTHERS_INCR: u64 = 5;
 
-    const FRUIT_AMOUNT:u128 = 30;
-    const REDUCTION_AMOUNT_ONCE:u64 = 30;
+    const FRUIT_AMOUNT: u128 = 30;
+    const REDUCTION_AMOUNT_ONCE: u64 = 30;
 
 
     #[abi(embed_v0)]
-    impl PlantActions of IActions<ContractState> {
+    impl ActionsImpl of IActions<ContractState> {
         fn spawn(ref world: IWorldDispatcher) {
             let caller = get_caller_address();
-            let mut player = get!(world, caller, (Player));
+            // let player = get!(world, caller, (Player));
             // assert(!player.is_spawn, 'already spawn');
 
-            let mut land_manager = get!(world, LAND_MANAGER, (LandManager));
+            let land_manager = get!(world, LAND_MANAGER, (LandManager));
 
             let land_id = land_manager.current_land_id + 1;
 
@@ -64,6 +69,7 @@ mod actions {
                 )
             );
         }
+
 
         fn plant(ref world: IWorldDispatcher, land_id: u128) {
             let caller = get_caller_address();
@@ -119,7 +125,9 @@ mod actions {
             assert(!tree.is_fruited, 'tree has fruited');
 
             // check water_value
-            let reduction = ((get_block_timestamp() - tree.last_watered_timestamp) / REDUCTION_INTERVAL) * REDUCTION_AMOUNT_ONCE;
+            let reduction = ((get_block_timestamp() - tree.last_watered_timestamp)
+                / REDUCTION_INTERVAL)
+                * REDUCTION_AMOUNT_ONCE;
             let mut current_water_value = 0;
             let mut current_is_fruited = false;
 
@@ -154,11 +162,16 @@ mod actions {
             let mut player = get!(world, caller, (Player));
 
             assert(tree.player != caller, 'cant water myself');
-            assert(player.last_helped_timestamp + WATER_INTERVAL < get_block_timestamp(), 'once an hour');
+            assert(
+                player.last_helped_timestamp + WATER_INTERVAL < get_block_timestamp(),
+                'once an hour'
+            );
             assert(!tree.is_fruited, 'tree has fruited');
 
             // check water_value
-            let reduction = ((get_block_timestamp() - tree.last_watered_timestamp) / REDUCTION_INTERVAL) * REDUCTION_AMOUNT_ONCE;
+            let reduction = ((get_block_timestamp() - tree.last_watered_timestamp)
+                / REDUCTION_INTERVAL)
+                * REDUCTION_AMOUNT_ONCE;
             let mut current_water_value = 0;
             let mut current_is_fruited = false;
 
@@ -256,6 +269,57 @@ mod actions {
                     last_pranked_timestamp: player.last_pranked_timestamp,
                 })
             )
+        }
+
+        fn reflash(ref world: IWorldDispatcher) {
+            let caller = get_caller_address();
+            let player = get!(world, caller, (Player));
+
+            assert(player.is_spawn, 'spawn first');
+
+            set!(
+                world,
+                (Player {
+                    player: player.player,
+                    is_spawn: player.is_spawn,
+                    tree_array: player.tree_array,
+                    land_array: player.land_array,
+                    seed_amount: player.seed_amount,
+                    fruit_amount: player.fruit_amount,
+                    last_helped_timestamp: player.last_helped_timestamp,
+                    last_pranked_timestamp: player.last_pranked_timestamp,
+                })
+            )
+        }
+
+        fn add_land(ref world: IWorldDispatcher) {
+            let caller = get_caller_address();
+            let player = get!(world, caller, (Player));
+
+            let land_manager = get!(world, LAND_MANAGER, (LandManager));
+
+            let land_id = land_manager.current_land_id + 1;
+
+            let mut new_land_array = player.land_array;
+            new_land_array.append(land_id);
+
+            set!(
+                world,
+                (
+                    Player {
+                        player: player.player,
+                        is_spawn: player.is_spawn,
+                        tree_array: player.tree_array,
+                        land_array: new_land_array,
+                        seed_amount: player.seed_amount,
+                        fruit_amount: player.fruit_amount,
+                        last_helped_timestamp: player.last_helped_timestamp,
+                        last_pranked_timestamp: player.last_pranked_timestamp,
+                    },
+                    LandManager { key_name: LAND_MANAGER, current_land_id: land_id, },
+                    Land { id: land_id, player: caller, tree_id: 0, is_available: true, }
+                )
+            );
         }
     }
 }

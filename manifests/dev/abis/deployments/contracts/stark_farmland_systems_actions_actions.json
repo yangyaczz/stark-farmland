@@ -55,7 +55,7 @@
   },
   {
     "type": "impl",
-    "name": "PlantActions",
+    "name": "ActionsImpl",
     "interface_name": "stark_farmland::systems::actions::IActions"
   },
   {
@@ -126,6 +126,20 @@
             "type": "core::integer::u128"
           }
         ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "reflash",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "add_land",
+        "inputs": [],
         "outputs": [],
         "state_mutability": "external"
       }

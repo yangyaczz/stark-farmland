@@ -1,0 +1,4 @@
+reads = []
+writes = [ "Tree", "TreeManager", "Player", "Land", "LandManager"]
+init_calldata = []
+name = "stark_farmland::systems::actions::actions"

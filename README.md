@@ -77,3 +77,16 @@ query {
   }
 }
 ```
+
+cp -r manifests/dev/base manifests/dev/overlays
+
+writes = [ "Tree", "TreeManager", "Player", "Land", "LandManager"]
+
+sozo migrate generate-overlays
+
+
+```
+katana --disable-fee --allowed-origins "*"
+sozo migrate apply
+torii --world 0x7dc571ec1ea63b3a2e85c1e0730707972b198d8932f6f97d2402ef4f2a83be7 --allowed-origins "*"
+```

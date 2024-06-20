@@ -1020,8 +1020,8 @@
     {
       "kind": "DojoContract",
       "address": "0x560d608e4d1a4ecb6a8b6f65fc5d070984984b827c9574e246db7e9c6436b5a",
-      "class_hash": "0x46431bc569f5722095940c44d12a0a2c1cfbf84263ec44bee88c98ba49220a4",
-      "original_class_hash": "0x46431bc569f5722095940c44d12a0a2c1cfbf84263ec44bee88c98ba49220a4",
+      "class_hash": "0x412f1d23d3b13c872ffb8953df0e03a0e01bc0116fc09e067dc6aaeb135f7f1",
+      "original_class_hash": "0x412f1d23d3b13c872ffb8953df0e03a0e01bc0116fc09e067dc6aaeb135f7f1",
       "base_class_hash": "0x22f3e55b61d86c2ac5239fa3b3b8761f26b9a5c0b5f61ddbd5d756ced498b46",
       "abi": [
         {
@@ -1080,7 +1080,7 @@
         },
         {
           "type": "impl",
-          "name": "PlantActions",
+          "name": "ActionsImpl",
           "interface_name": "stark_farmland::systems::actions::IActions"
         },
         {
@@ -1151,6 +1151,20 @@
                   "type": "core::integer::u128"
                 }
               ],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "reflash",
+              "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "add_land",
+              "inputs": [],
               "outputs": [],
               "state_mutability": "external"
             }
@@ -1235,7 +1249,13 @@
         }
       ],
       "reads": [],
-      "writes": [],
+      "writes": [
+        "Tree",
+        "TreeManager",
+        "Player",
+        "Land",
+        "LandManager"
+      ],
       "computed": [],
       "init_calldata": [],
       "name": "stark_farmland::systems::actions::actions"
