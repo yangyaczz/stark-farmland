@@ -37,6 +37,7 @@ Countdown to next watering, Countdown to the next prank.......
 3. ppt presentation + demo video
 
 4. submit the project 
+    - modify `![ui](./plan/UI.png)` in [README](../README.md)
     - `Project Edittor` If you deploy it on vercel, fill the demonstration. If you connect wallet successful, add the technologies of dynamic in the words. 
 
     - `Media Upload` get some screenshot of page and replace the picture in . 

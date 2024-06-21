@@ -1,7 +1,9 @@
-<div style="display: flex; align-items: flex-end; border-bottom: 3px solid gray; padding-bottom: 5px;">
-  <h1 style="margin: 0; flex-grow: 1;">Stark-Farmland</h1>
-  <img alt="logo" width="80" src="./plan/logo.png">
-</div>
+<picture>
+  <img alt="logo" align="right" width="40" src="./plan/logo.png">
+</picture>
+
+
+# Stark-Farmland
 
 ![ui](./plan/UI.png)
 - Frontend: <https://github.com/yangyaczz/stark-farmland-react/>
