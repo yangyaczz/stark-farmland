@@ -90,3 +90,22 @@ katana --disable-fee --allowed-origins "*"
 sozo migrate apply
 torii --world 0x7dc571ec1ea63b3a2e85c1e0730707972b198d8932f6f97d2402ef4f2a83be7 --allowed-origins "*"
 ```
+
+```
+slot auth login
+slot deployments create farmlandtest katana
+
+modify [tool.dojo.env] rpc
+
+slot deployments logs farmlandtest katana -f
+
+modify [tool.dojo.env] ac and pk
+
+sozo build
+sozo migrate plan
+sozo migrate apply
+
+slot deployments create farmlandtest torii --world 0x7dc571ec1ea63b3a2e85c1e0730707972b198d8932f6f97d2402ef4f2a83be7 --rpc https://api.cartridge.gg/x/farmlandtest/katana --start-block 1
+
+slot deployments logs farmlandtest torii -f
+```
